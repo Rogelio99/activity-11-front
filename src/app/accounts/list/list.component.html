@@ -1,0 +1,42 @@
+<div>Crud de cuentas</div>
+<div>
+  <p class="text-success">
+    {{message}}
+  </p>
+</div>
+<div>
+  <button class="btn btn-primary" (click)="openClose()">{{open_modal?"Cancelar":"Agregar"}}</button>
+</div>
+
+<app-add *ngIf="open_modal" [id]="id.toString()"></app-add>
+<table class="table">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Saldo</th>
+      <th scope="col">Status</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let account of accounts">
+      <th scope="row">{{ account.id }}</th>
+      <td>{{ account.balance | currency }}</td>
+      <td>{{ account.status ? "Activo" : "Inactivo" }}</td>
+      <td>{{ account.id_cliente }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="edit(account.id)">
+          Editar
+        </button>
+        <button class="btn btn-warning" (click)="changeStatus(account.id)">
+          {{account.status?"Desactivar":"Activar"}}
+        </button>
+        <button class="btn btn-danger" (click)="delete(account.id)">
+          Eliminar
+        </button>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
